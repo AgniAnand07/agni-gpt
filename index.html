@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Agni GPT</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<h1>🤖 Agni GPT</h1>
+
+<input type="text" id="msg" placeholder="Ask anything...">
+<button onclick="chat()">Send</button>
+
+<p id="reply"></p>
+
+<script>
+function chat() {
+
+let user = document.getElementById("msg").value;
+
+let answer = "Main abhi development me hoon.";
+
+if(user.includes("hello")){
+answer = "Namaste!";
+}
+
+if(user.includes("python")){
+answer = "Python ek programming language hai.";
+}
+
+document.getElementById("reply").innerHTML = answer;
+
+}
+</script>
+
+</body>
+</html>
