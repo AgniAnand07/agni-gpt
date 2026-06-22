@@ -3,35 +3,79 @@
 <head>
 <title>Agni GPT</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+font-family: Arial, sans-serif;
+background:#111;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+h1{
+color:#00ff88;
+}
+
+#msg{
+width:80%;
+padding:12px;
+border-radius:10px;
+border:none;
+}
+
+button{
+padding:12px 20px;
+background:#00ff88;
+border:none;
+border-radius:10px;
+margin-top:10px;
+cursor:pointer;
+}
+
+#reply{
+margin-top:20px;
+padding:15px;
+background:#222;
+border-radius:10px;
+min-height:50px;
+}
+</style>
+
 </head>
 <body>
 
 <h1>🤖 Agni GPT</h1>
 
 <input type="text" id="msg" placeholder="Ask anything...">
+<br><br>
+
 <button onclick="chat()">Send</button>
 
-<p id="reply"></p>
+<div id="reply">Hello! Main Agni GPT hoon.</div>
 
 <script>
-function chat() {
+function chat(){
 
-let user = document.getElementById("msg").value;
+let user=document.getElementById("msg").value.toLowerCase();
 
-let answer = "Main abhi development me hoon.";
+let answer="Mujhe abhi is sawal ka jawab nahi pata.";
 
-if(user.includes("hello")){
-answer = "Namaste!";
+if(user.includes("hello") || user.includes("hi")){
+answer="Namaste Agni Anand!";
 }
 
-if(user.includes("python")){
-answer = "Python ek programming language hai.";
+else if(user.includes("python")){
+answer="Python ek powerful programming language hai.";
 }
 
-document.getElementById("reply").innerHTML = answer;
+else if(user.includes("who are you")){
+answer="Main Agni GPT hoon.";
+}
 
+document.getElementById("reply").innerHTML=answer;
 }
 </script>
 
 </body>
-</html>
+  </html>
