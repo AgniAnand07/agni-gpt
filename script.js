@@ -1,21 +1,47 @@
-function sendMessage(){
+async function sendMessage() {
 
-let input=document.getElementById("userInput");
+let input = document.getElementById("userInput");
+let text = input.value.trim();
 
-let text=input.value;
+if (text === "") return;
 
-if(text=="") return;
+let messages = document.getElementById("messages");
 
-let messages=document.getElementById("messages");
-
+// User message
 messages.innerHTML +=
 `<div class="user-message">${text}</div>`;
 
+// AI placeholder
 messages.innerHTML +=
-`<div class="ai-message">Thinking...</div>`;
+`<div class="ai-message" id="thinking">Thinking...</div>`;
 
-input.value="";
+input.value = "";
+messages.scrollTop = messages.scrollHeight;
 
-messages.scrollTop=messages.scrollHeight;
+try {
+
+const response = await fetch("/api/chat", {
+method: "POST",
+headers: {
+"Content-Type": "application/json"
+},
+body: JSON.stringify({
+message: text
+})
+});
+
+const data = await response.json();
+
+// Replace "Thinking..." with AI response
+document.getElementById("thinking").innerHTML = data.reply;
+
+messages.scrollTop = messages.scrollHeight;
+
+} catch (error) {
+
+document.getElementById("thinking").innerHTML =
+"Something went wrong.";
+
+}
 
 }
