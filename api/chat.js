@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return res.status(405).json({ reply: "Method not allowed" });
   }
 
   try {
@@ -32,13 +32,19 @@ export default async function handler(req, res) {
 
     const data = await response.json();
 
-    res.status(200).json({
+    if (!response.ok) {
+      return res.status(500).json({
+        reply: JSON.stringify(data)
+      });
+    }
+
+    return res.status(200).json({
       reply: data.choices[0].message.content
     });
 
   } catch (error) {
-    res.status(500).json({
-      reply: "Something went wrong."
+    return res.status(500).json({
+      reply: error.message
     });
   }
-      }
+}
